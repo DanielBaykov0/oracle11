@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -20,5 +22,9 @@ public class UserService {
         User user = UserMapper.INSTANCE.dtoToEntity(userRequestDTO);
         userRepository.save(user);
         return UserMapper.INSTANCE.entityToDTO(user);
+    }
+
+    public List<UserResponseDTO> getAllUsers() {
+        return UserMapper.INSTANCE.entityToDTO(userRepository.findAll());
     }
 }
